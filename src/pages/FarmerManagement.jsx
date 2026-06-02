@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import data from '../data/data.json';
 import Footer from '../components/Footer';
 
@@ -11,10 +11,72 @@ export default function FarmerManagement() {
   const [factoryFilter, setFactoryFilter] = useState('All Factories');
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
+  const [farmers, setFarmers] = useState(data.farmers);
+  const [selectedFarmerId, setSelectedFarmerId] = useState('');
+  const [deliveryKilos, setDeliveryKilos] = useState('');
+  const [deliveryDate, setDeliveryDate] = useState(new Date().toISOString().slice(0, 10));
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
 
-  const factories = [...new Set(data.farmers.map(f => f.factory))];
+  const currentRate = data.exchangeRates.find(r => r.current)?.rate || 20;
 
-  const filtered = data.farmers.filter(f => {
+  useEffect(() => {
+    fetch('/api/farmers')
+      .then(res => res.ok ? res.json() : Promise.reject())
+      .then(result => {
+        if (Array.isArray(result.farmers)) {
+          setFarmers(result.farmers);
+          setSelectedFarmerId(current => current || (result.farmers[0]?.id || ''));
+        }
+      })
+      .catch(() => {
+        setFarmers(data.farmers);
+      });
+  }, []);
+  const factories = [...new Set(farmers.map(f => f.factory))];
+  const handleRecordDelivery = async () => {
+    if (!selectedFarmerId) {
+      setError('Please select a farmer');
+      return;
+    }
+    const kilos = parseFloat(deliveryKilos);
+    if (Number.isNaN(kilos) || kilos <= 0) {
+      setError('Please enter a valid weight');
+      return;
+    }
+
+    setSaving(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/delivery', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ farmerId: selectedFarmerId, kilos, date: deliveryDate })
+      });
+
+      const result = await response.json();
+      
+      if (!response.ok) {
+        setError(result.error || 'Failed to save delivery');
+        setSaving(false);
+        return;
+      }
+
+      setFarmers(result.farmers || farmers);
+      setShowModal(false);
+      setSelectedFarmerId('');
+      setDeliveryKilos('');
+      setDeliveryDate(new Date().toISOString().slice(0, 10));
+      setError('');
+      setSaving(false);
+    } catch (err) {
+      setError('Network error: ' + err.message);
+      setSaving(false);
+    }
+  };
+
+  const filtered = farmers.filter(f => {
     const q = search.toLowerCase();
     const matchQ = f.name.toLowerCase().includes(q) || f.phone.includes(q) || f.id.toLowerCase().includes(q);
     const matchS = statusFilter === 'All Status' || f.status === statusFilter;
@@ -31,9 +93,16 @@ export default function FarmerManagement() {
         <div className="page-header-row">
           <div>
             <h1 className="page-title">Farmer Management</h1>
-            <p className="page-subtitle">{data.farmers.length} farmers found</p>
+            <p className="page-subtitle">{farmers.length} farmers found</p>
           </div>
-          <button className="btn-primary" onClick={() => setShowModal(true)}>+ Record Delivery</button>
+          {/*
+          <button className="btn-primary" onClick={() => {
+            setSelectedFarmerId(farmers[0]?.id || '');
+            setDeliveryKilos('');
+            setDeliveryDate(new Date().toISOString().slice(0, 10));
+            setShowModal(true);
+          }}>+ Record Delivery</button>
+          */}
         </div>
 
         <div className="filters">
@@ -116,6 +185,7 @@ export default function FarmerManagement() {
       </div>
       <Footer />
 
+      {/*
       {showModal && (
         <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) setShowModal(false); }}>
           <div className="modal">
@@ -124,26 +194,45 @@ export default function FarmerManagement() {
             <p className="modal-sub">Add a new leaf delivery for a farmer</p>
             <div className="form-group">
               <label className="form-label">Farmer</label>
-              <select className="form-input">
-                <option>Select farmer...</option>
-                {data.farmers.map(f => <option key={f.id}>{f.name}</option>)}
+              <select className="form-input" value={selectedFarmerId} onChange={e => setSelectedFarmerId(e.target.value)}>
+                <option value="">Select farmer...</option>
+                {farmers.map(f => <option key={f.id} value={f.id}>{f.name}</option>)}
               </select>
             </div>
             <div className="form-group">
               <label className="form-label">Kilos</label>
-              <input type="number" className="form-input" placeholder="Enter kilos delivered" />
+              <input
+                type="number"
+                className="form-input"
+                placeholder="Enter kilos delivered"
+                value={deliveryKilos}
+                onChange={e => setDeliveryKilos(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label className="form-label">Amount (KES)</label>
+              <div className="form-input" style={{ background: '#f3f4f6', paddingTop: '10px', paddingBottom: '10px' }}>
+                KES {(parseFloat(deliveryKilos || 0) * currentRate).toLocaleString()}
+              </div>
             </div>
             <div className="form-group">
               <label className="form-label">Date</label>
-              <input type="date" className="form-input" defaultValue="2026-06-02" />
+              <input
+                type="date"
+                className="form-input"
+                value={deliveryDate}
+                onChange={e => setDeliveryDate(e.target.value)}
+              />
             </div>
+            {error && <div style={{ color: '#ef4444', fontSize: '12px', marginBottom: '12px' }}>{error}</div>}
             <div className="modal-actions">
-              <button className="btn-outline" onClick={() => setShowModal(false)}>Cancel</button>
-              <button className="btn-primary" onClick={() => setShowModal(false)}>Record Delivery</button>
+              <button className="btn-outline" onClick={() => setShowModal(false)} disabled={saving}>Cancel</button>
+              <button className="btn-primary" onClick={handleRecordDelivery} disabled={saving}>{saving ? 'Saving...' : 'Record Delivery'}</button>
             </div>
           </div>
         </div>
       )}
+      */}
     </div>
   );
 }
