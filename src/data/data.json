@@ -1,0 +1,84 @@
+{
+  "farmers": [
+    { "id": "F001", "name": "Brian Kipchoge", "phone": "0712345678", "factory": "Kericho", "balance": 50.0, "value": 1000, "status": "Active" },
+    { "id": "F002", "name": "Mary Wanjiku", "phone": "0723456789", "factory": "Kericho", "balance": 120.0, "value": 2400, "status": "Active" },
+    { "id": "F003", "name": "James Odhiambo", "phone": "0734567890", "factory": "Nandi Hills", "balance": 35.0, "value": 700, "status": "Active" },
+    { "id": "F004", "name": "Grace Chebet", "phone": "0745678901", "factory": "Nandi Hills", "balance": 200.0, "value": 4000, "status": "Active" },
+    { "id": "F005", "name": "Peter Mwangi", "phone": "0756789012", "factory": "Limuru", "balance": 75.0, "value": 1500, "status": "Active" },
+    { "id": "F006", "name": "Sarah Nyambura", "phone": "0767890123", "factory": "Limuru", "balance": 15.0, "value": 300, "status": "Suspended" },
+    { "id": "F007", "name": "John Kimani", "phone": "0778901234", "factory": "Kangaita", "balance": 310.0, "value": 6200, "status": "Active" },
+    { "id": "F008", "name": "Agnes Wambui", "phone": "0789012345", "factory": "Kangaita", "balance": 88.0, "value": 1760, "status": "Active" },
+    { "id": "F009", "name": "David Rotich", "phone": "0790123456", "factory": "Ragati", "balance": 145.0, "value": 2900, "status": "Active" },
+    { "id": "F010", "name": "Lucy Njeri", "phone": "0701234567", "factory": "Ragati", "balance": 62.0, "value": 1240, "status": "Active" },
+    { "id": "F011", "name": "Samuel Maina", "phone": "0712345679", "factory": "Githongo", "balance": 95.0, "value": 1900, "status": "Active" },
+    { "id": "F012", "name": "Esther Achieng", "phone": "0723456780", "factory": "Githongo", "balance": 52.0, "value": 1040, "status": "Active" },
+    { "id": "F013", "name": "Patrick Odhiambo", "phone": "0734567891", "factory": "Kericho", "balance": 180.0, "value": 3600, "status": "Active" },
+    { "id": "F014", "name": "Caroline Mutua", "phone": "0745678902", "factory": "Nandi Hills", "balance": 195.0, "value": 3900, "status": "Active" },
+    { "id": "F015", "name": "Joseph Kamau", "phone": "0756789013", "factory": "Limuru", "balance": 0.0, "value": 0, "status": "Suspended" },
+    { "id": "F016", "name": "Ruth Wanjiru", "phone": "0767890124", "factory": "Kangaita", "balance": 265.0, "value": 5300, "status": "Active" }
+  ],
+  "factories": [
+    { "id": "FAC001", "name": "Kericho Tea Factory", "county": "Kericho County", "farmers": 3, "activeFarmers": 3, "balance": 198, "balanceValue": 3960, "totalDelivered": 7100, "status": "Active" },
+    { "id": "FAC002", "name": "Nandi Hills Factory", "county": "Nandi County", "farmers": 3, "activeFarmers": 3, "balance": 415, "balanceValue": 8300, "totalDelivered": 10400, "status": "Active" },
+    { "id": "FAC003", "name": "Limuru Tea Factory", "county": "Kiambu County", "farmers": 3, "activeFarmers": 2, "balance": 157, "balanceValue": 3140, "totalDelivered": 4980, "status": "Active" },
+    { "id": "FAC004", "name": "Kangaita Factory", "county": "Kirinyaga County", "farmers": 3, "activeFarmers": 3, "balance": 543, "balanceValue": 10860, "totalDelivered": 10500, "status": "Active" },
+    { "id": "FAC005", "name": "Ragati Tea Factory", "county": "Nyeri County", "farmers": 2, "activeFarmers": 2, "balance": 207, "balanceValue": 4140, "totalDelivered": 6700, "status": "Active" },
+    { "id": "FAC006", "name": "Githongo Factory", "county": "Meru County", "farmers": 2, "activeFarmers": 1, "balance": 147, "balanceValue": 2940, "totalDelivered": 3800, "status": "Active" }
+  ],
+  "transactions": [
+    { "id": "T001", "farmer": "Brian Kipchoge", "type": "Bank", "date": "2026-05-12", "kilos": -100.0, "value": -2000 },
+    { "id": "T002", "farmer": "Brian Kipchoge", "type": "Delivery", "date": "2026-05-14", "kilos": 40.0, "value": 800 },
+    { "id": "T003", "farmer": "Brian Kipchoge", "type": "Mpesa", "date": "2026-05-17", "kilos": -30.0, "value": -600 },
+    { "id": "T004", "farmer": "Brian Kipchoge", "type": "Airtime", "date": "2026-05-18", "kilos": -2.5, "value": -50 },
+    { "id": "T005", "farmer": "Brian Kipchoge", "type": "Delivery", "date": "2026-05-20", "kilos": 55.0, "value": 1100 },
+    { "id": "T006", "farmer": "Mary Wanjiku", "type": "Delivery", "date": "2026-05-10", "kilos": 120.0, "value": 2400 },
+    { "id": "T007", "farmer": "James Odhiambo", "type": "Delivery", "date": "2026-05-11", "kilos": 35.0, "value": 700 },
+    { "id": "T008", "farmer": "Grace Chebet", "type": "Bank", "date": "2026-05-13", "kilos": -100.0, "value": -2000 },
+    { "id": "T009", "farmer": "Grace Chebet", "type": "Delivery", "date": "2026-05-15", "kilos": 300.0, "value": 6000 },
+    { "id": "T010", "farmer": "John Kimani", "type": "Mpesa", "date": "2026-05-16", "kilos": -50.0, "value": -1000 }
+  ],
+  "exchangeRates": [
+    { "rate": 20, "date": "2026-03-14", "updatedBy": "Admin", "current": true },
+    { "rate": 18, "date": "2026-03-01", "updatedBy": "Admin", "current": false },
+    { "rate": 17, "date": "2026-02-15", "updatedBy": "Admin", "current": false },
+    { "rate": 15, "date": "2026-02-01", "updatedBy": "Admin", "current": false },
+    { "rate": 16, "date": "2026-01-15", "updatedBy": "Admin", "current": false },
+    { "rate": 14, "date": "2026-01-01", "updatedBy": "Admin", "current": false }
+  ],
+  "monthlyOverview": [
+    { "month": "Sep", "deliveries": 4200, "conversions": 3800 },
+    { "month": "Oct", "deliveries": 4500, "conversions": 4100 },
+    { "month": "Nov", "deliveries": 4800, "conversions": 4300 },
+    { "month": "Dec", "deliveries": 5100, "conversions": 4600 },
+    { "month": "Jan", "deliveries": 5400, "conversions": 4900 },
+    { "month": "Feb", "deliveries": 5800, "conversions": 5200 },
+    { "month": "Mar", "deliveries": 6600, "conversions": 5900 }
+  ],
+  "weeklyConversions": [
+    { "week": "W1", "value": 1200 },
+    { "week": "W2", "value": 1400 },
+    { "week": "W3", "value": 1050 },
+    { "week": "W4", "value": 1600 }
+  ],
+  "conversionTypes": [
+    { "type": "M-Pesa", "percent": 45, "color": "#2e7d1e" },
+    { "type": "Bank Transfer", "percent": 25, "color": "#c8960c" },
+    { "type": "Airtime", "percent": 18, "color": "#4a9e2e" },
+    { "type": "Goods", "percent": 12, "color": "#86efac" }
+  ],
+  "transactionBreakdown": [
+    { "type": "Bank", "count": 32, "kilos": 2400, "value": 48000 },
+    { "type": "Delivery", "count": 64, "kilos": 2720, "value": 54400 },
+    { "type": "Mpesa", "count": 48, "kilos": 960, "value": 19200 },
+    { "type": "Airtime", "count": 32, "kilos": 120, "value": 2400 },
+    { "type": "Goods", "count": 16, "kilos": 400, "value": 8000 }
+  ],
+  "factoryPerformance": [
+    { "name": "Kericho", "value": 5800 },
+    { "name": "Nandi Hills", "value": 4900 },
+    { "name": "Limuru", "value": 5700 },
+    { "name": "Kangaita", "value": 5400 },
+    { "name": "Ragati", "value": 5600 },
+    { "name": "Githongo", "value": 4500 }
+  ]
+}
