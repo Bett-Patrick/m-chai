@@ -33,6 +33,18 @@ export default function FarmerManagement() {
         setFarmers(data.farmers);
       });
   }, []);
+  // Close modal when clicking outside modal content
+  useEffect(() => {
+    function onDocClick(e) {
+      if (!showModal) return;
+      const modal = document.querySelector('.modal');
+      if (modal && !modal.contains(e.target)) {
+        setShowModal(false);
+      }
+    }
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, [showModal]);
   const factories = [...new Set(farmers.map(f => f.factory))];
   const handleRecordDelivery = async () => {
     if (!selectedFarmerId) {

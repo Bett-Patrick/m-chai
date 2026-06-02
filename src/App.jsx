@@ -19,16 +19,17 @@ const PAGES = {
 export default function App() {
   const [auth, setAuth] = useState(false);
   const [page, setPage] = useState('dashboard');
+  const [collapsed, setCollapsed] = useState(false);
 
   if (!auth) return <LoginPage setAuth={setAuth} />;
 
   const PageComponent = PAGES[page] || Dashboard;
 
   return (
-    <div className="app">
-      <Sidebar page={page} setPage={setPage} setAuth={setAuth} />
+    <div className={"app" + (collapsed ? ' collapsed' : '')}>
+      <Sidebar page={page} setPage={setPage} setAuth={setAuth} collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className="main">
-        <Topbar />
+        <Topbar collapsed={collapsed} setCollapsed={setCollapsed} />
         <PageComponent />
       </div>
     </div>

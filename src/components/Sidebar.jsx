@@ -8,9 +8,9 @@ const NAV_ITEMS = [
   { id: 'factories', label: 'Factories', icon: '🏭' },
 ];
 
-export default function Sidebar({ page, setPage, setAuth }) {
+export default function Sidebar({ page, setPage, setAuth, collapsed, setCollapsed }) {
   return (
-    <aside className="sidebar">
+    <aside className={"sidebar" + (collapsed ? ' collapsed' : '')}>
       <div className="sidebar-logo">
         <div className="logo-brand">
           <div className="logo-icon">🍃</div>
@@ -36,7 +36,7 @@ export default function Sidebar({ page, setPage, setAuth }) {
             onClick={() => setPage(n.id)}
           >
             <span className="nav-icon">{n.icon}</span>
-            {n.label}
+            <span className="nav-label">{n.label}</span>
           </button>
         ))}
       </nav>
@@ -44,7 +44,7 @@ export default function Sidebar({ page, setPage, setAuth }) {
         <button className="signout-btn" onClick={() => setAuth(false)}>
           <span>↩</span> Sign Out
         </button>
-        <div className="collapse-btn">‹ Collapse</div>
+        <div className="collapse-btn" onClick={() => setCollapsed && setCollapsed(c => !c)}>{collapsed ? '› Expand' : '‹ Collapse'}</div>
       </div>
     </aside>
   );

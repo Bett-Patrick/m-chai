@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-export default function Topbar() {
+export default function Topbar({ collapsed, setCollapsed }) {
   const [open, setOpen] = useState(false);
   const pillRef = useRef(null);
 
@@ -20,6 +20,7 @@ export default function Topbar() {
 
   return (
     <header className="topbar">
+      <button className="sidebar-toggle" onClick={() => setCollapsed && setCollapsed(c => !c)}>☰</button>
       <div className="topbar-search">
         <span>🔍</span>
         <input placeholder="Search farmers, transactions..." />
