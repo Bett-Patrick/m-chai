@@ -47,6 +47,20 @@ body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var
 .user-pill-avatar { width:28px; height:28px; background:var(--green-mid); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px; font-weight:700; }
 .user-pill-name { font-size:12px; font-weight:600; color:var(--text); }
 .user-pill-email { font-size:11px; color:var(--text-muted); }
+
+/* Profile dropdown and interaction */
+.user-pill { position:relative; cursor:pointer; user-select:none; }
+.user-pill * { user-select:none; }
+.user-pill-arrow { margin-left:8px; font-size:12px; opacity:0.8; }
+.user-dropdown { position:absolute; right:0; top:56px; background:#fff; border:1px solid var(--border); border-radius:10px; padding:12px; width:220px; box-shadow:0 6px 18px rgba(16,24,40,0.08); z-index:60; }
+.user-dropdown .ud-top { display:flex; gap:10px; align-items:center; margin-bottom:8px; }
+.user-dropdown .ud-avatar { width:44px; height:44px; border-radius:50%; background:var(--green-btn); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; }
+.user-dropdown .ud-name { font-weight:700; color:var(--text); }
+.user-dropdown .ud-email { font-size:12px; color:var(--text-muted); }
+.user-dropdown .ud-actions { display:flex; justify-content:center; margin-top:8px; }
+.ud-signout { background:none; border:none; color:#dc2626; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:8px; }
+.ud-signout:hover { background:rgba(220,38,38,0.08); text-decoration:none; }
+.ud-signout-icon { font-size:14px; display:inline-flex; align-items:center; }
 /* Footer */
 .footer { padding:16px 24px; border-top:1px solid var(--border); background:#fff; display:flex; align-items:center; justify-content:space-between; }
 .footer-logo { display:flex; align-items:center; gap:6px; }
